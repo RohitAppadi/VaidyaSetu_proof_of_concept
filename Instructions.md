@@ -1,5 +1,5 @@
 # Execution 
-## To enure a smooth operation of my project in your system I will thouroughly guide you through on how to run and all the libraries u need to download 
+## To enure a smooth operation of my project in your system I will thouroughly guide you through on how to run and all the libraries you need to download 
 1. Set up VSCode or any other compiler that is comfortable for your work type (I would recommend VSCode).
 2. Download all the files in the repository mainly two important files that are the backbone and the structure of the prototype- **app.py** and **index.html** and **cmds.txt** and **requiremnts.txt**.
 3. Create a separate folder on your Desktop and place **app.py** in the folder.
