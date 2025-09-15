@@ -4,10 +4,10 @@
 2. Download all the files in the repository mainly two important files that are the backbone and the structure of the prototype- **app.py** and **index.html** and **cmds.txt** and **requiremnts.txt**.
 3. Create a separate folder on your Desktop and place **app.py** in the folder.
 4. Create a sub folder named **template** and place the **index.html** in this folder.
-5. Till now if everything is correct, in your VSCode select file>open folder>[Folder_Name}>Select folder
+5. Till now if everything is correct, in your VSCode select file>open folder>{Folder_Name}>Select folder
 6. After opening your main folder not open **app.py** and open terminal.
 7. Follow through the **cmds.txt** file provided to create a virtual space in your system and if every thing is working correctly after 2 steps your terminal folder address should start with **(venv)**
-which is a Virtual Enviroinment all the Python libraries and dependencies we need, like Flask and the QR code generator, areonly installed in our project folder and don't
+which is a Virtual Enviroinment all the Python libraries and dependencies we need, like Flask and the QR code generator, are only installed in our project folder and don't
 interfere with other projects on our computer. It keeps our project clean, organized,
 and easily shareable with others on our team.
 8. Continue following through the **cmds.txt** file and download **requiremnts.txt** which consists of all the libraries such as flask, pillow, QRcode and requests.
