@@ -16,7 +16,7 @@ and easily shareable with others on our team.
 11. Check out the interface and add records according to the given questions, and don't forget the interactive map.
 12. After adding the necessary details, Congratulaion- You have succesfully added a record and generated a QR code, when scanned you will be provided with you unique hashcode.
 13. On the bottom you will find the interactive map and a pointer placed in the location with exact Time, and Day with the batch ID and the Herb name.
-14. You can add more than one record and also if you face any difficulty with the **Geocode** be sure to input the address again without specifics or numbers such as sectors and pincodes.
-15. If is issue still persists there might be a problem with with **Geocode API** since it is a third party free to use open source Interactive map and can have challenges loading.
+14. You can add more than one record and also if you face any difficulty with the *Geocode* be sure to input the address again without specifics or numbers such as sectors and pincodes.
+15. If the issue still persists there might be a problem with with *Geocode API* since it is a third party free to use open source Interactive map and can have challenges loading.
 16. After exploring the page go to the VSCode and click on the terminal and do Ctrl+C to stop the sever.
 You have Succesfully added records, recieved a unique hashcode and even generated a QR code all while using basic python and HTML.
