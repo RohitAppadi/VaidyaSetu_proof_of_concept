@@ -19,4 +19,4 @@ and easily shareable with others on our team.
 14. You can add more than one record and also if you face any difficulty with the *Geocode* be sure to input the address again without specifics or numbers such as sectors and pincodes.
 15. If the issue still persists there might be a problem with with *Geocode API* since it is a third party free to use open source Interactive map and can have challenges loading.
 16. After exploring the page go to the VSCode and click on the terminal and do Ctrl+C to stop the sever.
-You have Succesfully added records, recieved a unique hashcode and even generated a QR code all while using basic python and HTML.
+## You have Succesfully added records, recieved a unique hashcode and even generated a QR code all while using basic python and HTML.
