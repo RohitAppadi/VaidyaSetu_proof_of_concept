@@ -15,12 +15,12 @@ The AI tools we initially planned to use for our final design are as follows- Au
 ##Reaserch and Refrences
 We finally reach the end of this blog and will discuss a bit about our research and wrap it up - most of the products that focus on *Blockchain* such as IBM Food Trust, SAP Cloud Platform BlockChain, Provenance all focusing on food and goods but no such application for Ayurvedic Herbs. Which ultimately gives us an edge if our product succeeds and is released in the market it can have a big imapact on farmers, manufacturers and even consumers who pay a lot of their hard earned money for getting the Ayurvedic Herb.
 ## Our Research and reference are as follows -
-1.IBM: https://www.ibm.com/docs/en/appconnect/12.0.x?topic=hga-food-trust
-2.SAP Cloud Platform Blockchain: https://community.sap.com/t5/technology-blog-posts-by-members/introduction-toblockchain-and-sap-cloud-platformblockchain-service/ba-p/13377171
-3.Provenance: https://www.provenance.org/
+1. IBM: https://www.ibm.com/docs/en/appconnect/12.0.x?topic=hga-food-trust
+2. SAP Cloud Platform Blockchain: https://community.sap.com/t5/technology-blog-posts-by-members/introduction-toblockchain-and-sap-cloud-platformblockchain-service/ba-p/13377171
+3. Provenance: https://www.provenance.org/
 ## Our Feasibility Facts
-1.HerBchain: https://www.sciencedirect.com/science/article/pii/S2225411021000870
-2.ResearchGate: https://www.researchgate.net/publication/387552836_Exploring_the_Blockchain's_Green_Revolution_in_Medicinal_Plant_Supply_Chains_Blossoming_Trust_-_A_Review
+1. HerBchain: https://www.sciencedirect.com/science/article/pii/S2225411021000870
+2. ResearchGate: https://www.researchgate.net/publication/387552836_Exploring_the_Blockchain's_Green_Revolution_in_Medicinal_Plant_Supply_Chains_Blossoming_Trust_-_A_Review
 
 
 
