@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VaidyaSetu</title>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<style>
+  /* Leaf background pattern from SVG */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e6f2e6;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="%2391c788" fill-opacity="0.15" d="M12 2C10 6 6 8 6 8s4 2 6 6c2 4 6 6 6 6s-4-2-6-6c-2-4-6-6-6-6s4-2 6-6z"/></svg>');
+    background-repeat: repeat;
+    background-size: 100px 100px;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    background: #ffffffdd;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    color: #2f4f2f;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+    text-shadow: 1px 1px 2px #a3c293;
+    font-size: 3rem;
+  }
+
+  h3 {
+    text-align: center;
+    color: #3a5d3a;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-style: italic;
+    font-size: 1.3rem;
+  }
+
+  h2 {
+    color: #2f4f2f;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+    text-shadow: 1px 1px 2px #a3c293;
+  }
+
+  h4 {
+    text-align: center;
+    color: #3a5d3a;
+    font-weight: 500;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+    background: #d9f0d9;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px #a3c293;
+    margin-bottom: 40px;
+  }
+
+  form label {
+    font-weight: 600;
+    color: #3a5d3a;
+    align-self: center;
+  }
+
+  form input[type='text'],
+  form input[type='datetime-local'] {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1.8px solid #7bb77b;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  form input[type='text']:focus,
+  form input[type='datetime-local']:focus {
+    outline: none;
+    border-color: #4a7c4a;
+    box-shadow: 0 0 8px #4a7c4aaa;
+  }
+
+  form button {
+    grid-column: 1 / -1;
+    padding: 14px 0;
+    background: #4a7c4a;
+    color: #e6f2e6;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 12px #3a5d3aaa;
+    transition: background-color 0.3s ease;
+  }
+
+  form button:hover {
+    background: #3a5d3a;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: 10px;
+  }
+
+  thead tr {
+    background: #4a7c4a;
+    color: #e6f2e6;
+    font-weight: 700;
+    border-radius: 12px;
+  }
+
+  thead th {
+    padding: 14px 15px;
+    text-align: left;
+  }
+
+  tbody tr {
+    background: #d9f0d9;
+    box-shadow: 0 2px 6px #a3c293aa;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+  }
+
+  tbody tr:hover {
+    background: #b7d9b7;
+  }
+
+  tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+  }
+
+  .qr-container img {
+    max-width: 80px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #4a7c4a88;
+  }
+
+  #map {
+    height: 450px;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    form {
+      grid-template-columns: 1fr;
+    }
+    form button {
+      grid-column: 1;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>VaidyaSetu</h1>
+    <h3>Your Bridge to Authentic Ayurvedic Herbs.</h3>
+
+    <form id="recordForm" action="/add_record" method="POST">
+      <label for="species">Herb Species:</label>
+      <input type="text" name="species" id="species" required />
+
+      <label for="collector_id">Collector ID:</label>
+      <input type="text" name="collector_id" id="collector_id" required />
+
+      <label for="location">Location:</label>
+      <input
+        type="text"
+        name="location"
+        id="location"
+        placeholder="Enter address"
+        required
+      />
+
+      <input type="hidden" name="latitude" id="latitude" />
+      <input type="hidden" name="longitude" id="longitude" />
+
+      <label for="timestamp">Timestamp:</label>
+      <input type="datetime-local" name="timestamp" id="timestamp" required />
+
+      <button type="submit">Add Record</button>
+    </form>
+
+    <h2>Blockchain Ledger</h2>
+    <h4>Provenance, Purity, and Peace of Mind.</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Timestamp</th>
+          <th>Species</th>
+          <th>Collector</th>
+          <th>Location</th>
+          <th>QR</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for block in blockchain_chain %}
+        <tr
+          data-hash="{{ block.hash }}"
+          data-lat="{{ block.data.latitude }}"
+          data-lng="{{ block.data.longitude }}"
+        >
+          <td>{{ block.index }}</td>
+          <td>{{ block.timestamp }}</td>
+          <td>{{ block.data.species }}</td>
+          <td>{{ block.data.collector_id }}</td>
+          <td>{{ block.data.location }}</td>
+          <td class="qr-container">
+            {% if block.index > 0 %}<span>Generating...</span>{% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>Collection Map</h2>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Timestamp
+      const now = new Date();
+      const formatted = now.toISOString().slice(0, 16);
+      const tsEl = document.getElementById('timestamp');
+      if (tsEl && !tsEl.value) tsEl.value = formatted;
+
+      const form = document.getElementById('recordForm');
+      const locInput = document.getElementById('location');
+      const latInput = document.getElementById('latitude');
+      const lngInput = document.getElementById('longitude');
+
+      // Intercept form to call Nominatim geocode
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loc = locInput.value.trim();
+        if (!loc) {
+          alert('Enter location');
+          return;
+        }
+
+        try {
+          const resp = await fetch('/geocode', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ location: loc }),
+          });
+          const data = await resp.json();
+          if (!resp.ok) {
+            alert(data.error || 'Geocode failed');
+            return;
+          }
+          latInput.value = data.lat;
+          lngInput.value = data.lng;
+          form.submit();
+        } catch (err) {
+          console.error(err);
+          alert('Geocode failed');
+        }
+      });
+
+      // QR Code generation
+      const rows = document.querySelectorAll('tr[data-hash]');
+      rows.forEach((row) => {
+        const hash = row.dataset.hash;
+        const qrCell = row.querySelector('.qr-container');
+        if (!hash || hash == '0' || !qrCell) return;
+        fetch('/generate_qr', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data: hash }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.image_data) {
+              const img = document.createElement('img');
+              img.src = `data:image/png;base64,${data.image_data}`;
+              qrCell.innerHTML = '';
+              qrCell.appendChild(img);
+            } else qrCell.textContent = 'Error';
+          })
+          .catch(() => (qrCell.textContent = 'Error'));
+      });
+
+      // Initialize map
+      const map = L.map('map').setView([20.5937, 78.9629], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+      }).addTo(map);
+
+      // Add markers
+      rows.forEach((row) => {
+        const lat = parseFloat(row.dataset.lat);
+        const lng = parseFloat(row.dataset.lng);
+        if (isNaN(lat) || isNaN(lng)) return;
+        const species = row.children[2].textContent;
+        const collector = row.children[3].textContent;
+        const location = row.children[4].textContent;
+        const marker = L.marker([lat, lng]).addTo(map);
+        marker.bindPopup(
+          `<b>${species}</b><br>Collector: ${collector}<br>Location: ${location}`
+        );
+      });
+    });
+  </script>
+</body>
+</html>
